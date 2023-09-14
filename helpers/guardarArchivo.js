@@ -10,8 +10,8 @@ const leerDB = () => {
   }
   const info = fs.readFileSync(archivo, "utf8");
   const data = JSON.parse(info.toString());
-  console.log(data);
-  return null;
+  //console.log(data);
+  return data;
 };
 module.exports = {
   guardaDB,

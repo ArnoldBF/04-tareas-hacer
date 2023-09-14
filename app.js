@@ -3,16 +3,15 @@ const { guardaDB, leerDB } = require("./helpers/guardarArchivo");
 const { inquirerMenu, pausa, leerInput } = require("./helpers/inquirer");
 const Tareas = require("./models/tareas");
 const main = async () => {
-  console.log("Hello World".yellow);
+  //console.log("Hello World".yellow);
   let opt;
 
   const tareas = new Tareas();
   const tareasDB = leerDB();
 
   if (tareasDB) {
-    //Establecer las tareas
+    tareas.cargarTareasFromArray(tareasDB);
   }
-  await pausa();
   do {
     //imprimir el menu
     opt = await inquirerMenu();
@@ -23,11 +22,10 @@ const main = async () => {
         tareas.crearTarea(desc);
         break;
       case 2:
-        console.log(tareas.listadoArr);
-
+        tareas.listadoCompleto();
         break;
     }
-    //guardaDB(tareas.listadoArr);
+    guardaDB(tareas.listadoArr);
     await pausa();
   } while (opt !== 7);
 };
